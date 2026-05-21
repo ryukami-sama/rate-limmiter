@@ -26,4 +26,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/frontend/.next/static ./.next/sta
 
 USER nextjs
 EXPOSE 3000
-CMD ["node", "server.js"]
+# Railway injects HOSTNAME (container id). Next.js binds to it instead of 0.0.0.0,
+# which makes healthchecks fail — override for the node process only.
+CMD ["sh", "-c", "HOSTNAME=0.0.0.0 exec node server.js"]

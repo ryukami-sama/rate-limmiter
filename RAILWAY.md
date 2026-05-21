@@ -66,6 +66,7 @@ Both app Dockerfiles build from the **repo root** (they copy `shared/`). Do not 
    | Variable | Value | Notes |
    |----------|-------|-------|
    | `NEXT_PUBLIC_API_URL` | `https://${{backend.RAILWAY_PUBLIC_DOMAIN}}` | **Required at build time** — no trailing slash |
+   | `HOSTNAME` | `0.0.0.0` | Optional if using latest Dockerfile (see troubleshooting) |
 
 6. **Redeploy** frontend after setting `NEXT_PUBLIC_API_URL` (Next.js bakes this into the client bundle during `docker build`).
 
@@ -174,6 +175,16 @@ Compose import is a shortcut for step 1–3, not a full production config.
 ### `server.js` not found
 
 - Standalone output is at `.next/standalone/frontend/` — already handled in `frontend/Dockerfile`
+
+### Healthcheck fails on `/` (service unavailable)
+
+Railway sets `HOSTNAME` on containers. Next.js standalone uses it as the bind address, so the app listens on an internal hostname instead of `0.0.0.0` and healthchecks never reach it.
+
+**Fix (pick one):**
+
+1. Pull latest code — `frontend/Dockerfile` starts with `HOSTNAME=0.0.0.0`
+2. Or add variable on **frontend** service: `HOSTNAME` = `0.0.0.0`
+3. Redeploy frontend
 
 ---
 
