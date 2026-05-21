@@ -1,0 +1,13 @@
+# Railway config for the frontend service.
+# Assign this file in the service Settings → Config file path: /frontend/railway.toml
+# Root Directory must stay at repo root (/) — the Dockerfile copies shared/ from there.
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "frontend/Dockerfile"
+watchPatterns = ["frontend/**", "shared/**", "package-lock.json", "package.json"]
+
+[deploy]
+healthcheckPath = "/"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"

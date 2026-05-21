@@ -1,0 +1,13 @@
+# Railway config for the backend service.
+# Assign this file in the service Settings → Config file path: /backend/railway.toml
+# Root Directory must stay at repo root (/) — the Dockerfile copies shared/ from there.
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "backend/Dockerfile"
+watchPatterns = ["backend/**", "shared/**", "package-lock.json", "package.json"]
+
+[deploy]
+healthcheckPath = "/api/health"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"
