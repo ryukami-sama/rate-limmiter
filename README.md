@@ -2,7 +2,7 @@
 
 ## Live Demo
 
-**URL:** [Deploy](https://your-app.up.railway.app](https://frontend-production-222f.up.railway.app/)
+**URL:**: https://your-app.up.railway.app](https://frontend-production-222f.up.railway.app/
 
 ## Local Setup
 
