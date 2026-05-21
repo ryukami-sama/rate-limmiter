@@ -126,15 +126,6 @@ Rate limits must be consistent across multiple backend instances. In-memory coun
 
 Implemented as Express middleware; maps directly to a NestJS Guard via `CanActivate` — available on request. The shared `checkRateLimit(key, options)` function in `backend/src/middleware/rateLimiter.ts` can be injected into a guard without changing algorithm logic.
 
-## Deploy to Railway
-
-See **[RAILWAY.md](./RAILWAY.md)** for the full guide. Summary:
-
-1. Add **Redis**, **backend**, and **frontend** services (repo root as build context)
-2. Point each service at `/backend/railway.toml` and `/frontend/railway.toml`
-3. Set reference variables: `REDIS_URL`, `CORS_ORIGIN`, `NEXT_PUBLIC_API_URL`
-4. Generate public domains on backend and frontend
-
 ## Project Structure
 
 ```
